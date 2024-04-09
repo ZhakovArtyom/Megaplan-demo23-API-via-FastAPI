@@ -1,25 +1,24 @@
-Данное приложение реализует взаимодействие с API Megaplan(demo23),
-с помощью фреймворка FastAPI.
-Основы работы с CRM можно посмотреть в папке src/crm_interaction.
+![python 3.11](https://img .shields.io/github/languages/top/{username}/{repo-name}?color=yellow)
+# Данное приложение реализует взаимодействие с API Megaplan(demo23), с помощью фреймворка FastAPI.
+_Основы работы с CRM можно посмотреть в папке src/crm_interaction._
 
-Инструкция установки
-
+# Инструкция установки
 клонирование проекта
-
+`git clone https://github.com/ZhakovArtyom/Megaplan-demo23-API-via-FastAPI.git`
 
 создание виртуального окружения
-python3 -m venv venv
+`python3 -m venv venv`
 
 активация виртуального окружения
-venv\Scripts\activate.bat - для Windows
-source venv/bin/activate - для Linux и MacOS
+`venv\Scripts\activate.bat` - для Windows
+`source venv/bin/activate` - для Linux и MacOS
 
 установить зависимости
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 заменить файл .env_example на .env и подставить актуальные данные
 
-Затем необходимо перейти в корневую папку проекта и запустить команду uvicorn main:app --reload для запуска сервера uvicorn
+Затем необходимо перейти в корневую папку проекта и запустить команду `uvicorn main:app --reload` для запуска сервера uvicorn
 
 Далее перейти по ссылке в браузере
 http://127.0.0.1:8000 - для взаимодействия через графический интерфейс
