@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaplanAPI</title>
+    <style>
+        #message {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            text-align: center;
+        }
+        /* Стили для спиннера */
+        .spinner {
+            border: 4px solid rgba(0,0,0,.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #09f;
+            margin: 10px auto;
+            animation: spin 1s ease infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MegaplanAPI</h1>
+        <form id="login-form">
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login" required>
+
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Войти</button>
+        </form>
+        <div id="message"></div>
+        <!-- Элемент для спиннера -->
+        <div class="spinner" style="display: none;"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const messageDiv = document.getElementById('message');
+        const spinner = document.querySelector('.spinner');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+            // Показываем спиннер
+            spinner.style.display = 'block';
+            messageDiv.textContent = ''; // Очищаем сообщение
+
+            try {
+                const response = await fetch('/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `login=${encodeURIComponent(login)}&password=${encodeURIComponent(password)}`
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.textContent = data.message;
+                } else {
+                    messageDiv.textContent = data.detail;
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                messageDiv.textContent = 'Ошибка запроса';
+            } finally {
+                // Скрываем спиннер после получения ответа
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
